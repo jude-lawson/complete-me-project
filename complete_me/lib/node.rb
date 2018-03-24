@@ -1,5 +1,4 @@
-class CompleteMe
-
+class Node
   attr_accessor :weight, :flag, :children
 
   def initialize
@@ -8,8 +7,12 @@ class CompleteMe
     @children = {}
   end
 
-  def insert(word)
+  def has_children?
+    !@chilren.empty?
+  end
 
+  def does_not_have_children?
+    @children.empty?
   end
 
 end
