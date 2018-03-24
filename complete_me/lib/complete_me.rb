@@ -1,15 +1,9 @@
+require_relative 'node'
+require_relative 'trie'
+require 'pry'
+
 class CompleteMe
 
-  attr_accessor :weight, :flag, :children
 
-  def initialize
-    @weight = {}
-    @flag = false
-    @children = {}
-  end
-
-  def insert(word)
-
-  end
 
 end
