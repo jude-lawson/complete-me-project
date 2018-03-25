@@ -1,0 +1,3 @@
+[submodule "spec_harness"]
+	path = spec_harness
+	url = git@github.com:turingschool-examples/complete_me_spec_harness.git
