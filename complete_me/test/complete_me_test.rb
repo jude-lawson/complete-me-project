@@ -28,4 +28,19 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("hi")
     assert_equal ["h"], @complete_me.root_node.children.keys
   end
+
+  def test_root_node_child_has_correct_state
+    @complete_me.insert("cat")
+    assert_equal ({}), @complete_me.root_node.children["c"].weight
+    assert_equal false, @complete_me.root_node.children["c"].flag
+    assert_equal ["a"], @complete_me.root_node.children["c"].children.keys
+  end
+
+  def test_word_flag_is_correct_after_inserting_word
+    @complete_me.insert("hi")
+    expected = true
+    # Later this needs to be updated with traversal method, rather than directly accessing it
+    actual = @complete_me.root_node.children["h"].children["i"].flag
+    assert_equal expected, actual
+  end
 end
