@@ -36,6 +36,17 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["a"], @complete_me.root_node.children["c"].children.keys
   end
 
+  def test_that_root_node_child_has_correct_child
+    @complete_me.insert("dog")
+    root_child = @complete_me.root_node.children["d"]
+    assert_instance_of Node, root_child.children["o"]
+    # binding.pry
+    assert_equal ["o"], root_child.children.keys
+    assert_equal ({}), root_child.children["o"].weight
+    assert_equal false, root_child.children["o"].flag
+    assert_instance_of Node, root_child.children["o"].children["g"]
+  end
+
   def test_word_flag_is_correct_after_inserting_word
     @complete_me.insert("hi")
     expected = true
