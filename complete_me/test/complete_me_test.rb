@@ -54,4 +54,27 @@ class CompleteMeTest < MiniTest::Test
     actual = @complete_me.root_node.children["h"].children["i"].flag
     assert_equal expected, actual
   end
+
+  def test_that_populate_can_enter_one_word_with_trailing_newline
+    word_set = "pizza\n"
+    @complete_me.populate(word_set)
+    assert_equal ["p"], @complete_me.root_node.children.keys
+    assert @complete_me.root_node.children["p"].has_key?("i")
+    assert @complete_me.root_node.children["p"].children["i"].has_key?("z")
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].has_key?("z")
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].has_key?("a")
+  end
+
+  def test_populate_creates_flag_with_one_word
+    word_set = "pizza\n"
+    @complete_me.populate(word_set)
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].flag
+  end
+
+  # def test_populate_inserts_two_newline_separated_words
+  #   word_set = "pizza\npie"
+  #   @complete_me.populate(word_set)
+  #   assert_equal ["p","i","z","z","a"], @complete_me.root_node.children.keys
+  # end
+
 end
