@@ -14,7 +14,7 @@ class CompleteMe
   def insert(word)
     node = @root_node
     word.chars.map do |letter|
-      if !node.children.has_key?(letter)
+      unless node.children.key?(letter)
         node.children[letter] = Node.new
       end
       node = node.children[letter]
