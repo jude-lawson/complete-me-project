@@ -24,4 +24,8 @@ class CompleteMeTest < MiniTest::Test
     assert_instance_of Node, @complete_me.root_node.children["h"].children["i"]
   end
 
+  def test_root_node_has_correct_child
+    @complete_me.insert("hi")
+    assert_equal ["h"], @complete_me.root_node.children.keys
+  end
 end
