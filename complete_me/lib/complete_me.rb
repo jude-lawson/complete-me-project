@@ -22,4 +22,10 @@ class CompleteMe
     node.flag = true
   end
 
+  def
+
+  def count
+
+  end
+
 end
