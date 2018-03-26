@@ -75,11 +75,11 @@ class CompleteMeTest < MiniTest::Test
     word_set = "pizza\npie"
     @complete_me.populate(word_set)
     assert_equal ["p"], @complete_me.root_node.children.keys
-    assert_equal ["i"], @complete_me.root_node.children["p"].keys
-    assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].keys
-    assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].keys
-    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].keys
-    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["e"].keys
+    assert_equal ["i"], @complete_me.root_node.children["p"].children.keys
+    assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].children.keys
+    assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].children.keys
+    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children.keys
+    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["e"].children.keys
   end
 
   def test_populate_flags_words_when_inserting_two_words
