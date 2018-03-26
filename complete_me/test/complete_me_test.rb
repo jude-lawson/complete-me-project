@@ -148,4 +148,29 @@ class CompleteMeTest < MiniTest::Test
     assert_equal [], @complete_me.root_node.children["p"].children["i"].children["e"].children.keys
   end
 
+  def test_select_raises_priority
+    @complete_me.populate("pizza\npie")
+    @complete_me.select("pi", "pizza")
+    assert_equal ["pizza", "pie"], @complete_me.suggest("piz")
+  end
+
+  def test_traverse_walks_tree_with_one_word_branch
+    @complete_me.insert("pizza")
+    assert_equal ["pizza"], @complete_me.suggest("piz")
+  end
+
+  def test_traverse_walks_tree_with_two_word_branch
+    @complete_me.populate("pizza\npie")
+    assert_equal ["pie", "pizza"], @complete_me.suggest("pi")
+  end
+
+  def test_general_result_of_tree_traversal
+    dictionary = File.read('./data/test_dictionary.txt')
+    @complete_me.populate(dictionary)
+    assert_equal ["constellation"], @complete_me.suggest("const")
+    assert_equal ["pie", "pizza"], @complete_me.suggest("pi")
+    assert_equal ["xylophone"], @complete_me.suggest("xylop")
+    assert_equal ["apple"], @complete_me.suggest("apple")
+  end
+
 end
