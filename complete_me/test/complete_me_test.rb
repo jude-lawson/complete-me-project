@@ -89,4 +89,54 @@ class CompleteMeTest < MiniTest::Test
     assert @complete_me.root_node.children["p"].chidlren["i"].children["z"].children["z"].flag
   end
 
+  def test_populate_inserts_words_from_file
+    dictionary = File.read('../data/test_dictionary')
+    @complete_me.populate(dictionary)
+    # Root
+    assert_equal [a..z], @complete_me.root_node.children.keys
+    # First two
+    assert_equal ["p"], @complete_me.root_node.children["a"].keys
+    assert_equal ["p"], @complete_me.root_node.children["a"].children["p"].keys
+    assert_equal ["l"], @complete_me.root_node.children["a"].children["p"].children["p"].keys
+    assert_equal ["e"], @complete_me.root_node.children["a"].children["p"].children["p"].children["l"].keys
+    assert_equal [], @complete_me.root_node.children["a"].children["p"].children["p"].children["l"].chidlren["e"].keys
+
+    assert_equal ["a"], @complete_me.root_node.chidlren["b"].keys
+    assert_equal ["n"], @complete_me.root_node.chidlren["b"].children["a"].keys
+    assert_equal ["a"], @complete_me.root_node.chidlren["b"].children["a"].chidlren["n"].keys
+    assert_equal ["n"], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].keys
+    assert_equal ["a"], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].children["n"].keys
+    assert_equal [], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].children["n"].children["a"].keys
+    
+    # Middle two (by letters of alphabet)
+    assert_equal ["o"], @complete_me.root_node.children["m"].keys
+    assert_equal ["o"], @complete_me.root_node.children["m"].children["o"].keys
+    assert_equal ["n"], @complete_me.root_node.children["m"].children["o"].children["o"].keys
+    assert_equal [], @complete_me.root_node.children["m"].children["o"].children["o"].children["n"].keys
+
+    assert_equal ["e"], @complete_me.root_node.children["n"].keys
+    assert_equal ["s"], @complete_me.root_node.children["n"].children["e"].keys
+    assert_equal ["t"], @complete_me.root_node.children["n"].children["e"].children["s"].keys
+    assert_equal [], @complete_me.root_node.children["n"].children["e"].children["s"].chidlren["t"].keys
+
+    #Last two
+    assert_equal ["y"], @complete_me.root_node.children["x"].keys
+    assert_equal ["l"], @complete_me.root_node.children["x"].children["y"].keys
+    assert_equal ["o"], @complete_me.root_node.children["x"].children["y"].children["l"].keys
+    assert_equal ["p"], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].keys
+    assert_equal ["h"], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].children["p"].keys
+    assert_equal ["o"], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].children["p"].children["h"].keys
+    assert_equal ["n"], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].children["p"].children["h"].children["o"].keys
+    assert_equal ["e"], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].children["p"].children["h"].children["o"].children["n"].keys
+    assert_equal [], @complete_me.root_node.children["x"].children["y"].children["l"].children["o"].children["p"].children["h"].children["o"].children["n"].children["e"].keys
+
+    assert_equal ["e"], @complete_me.root_node.children["z"].keys
+    assert_equal ["r"], @complete_me.root_node.children["z"].children["e"].keys
+    assert_equal ["o"], @complete_me.root_node.children["z"].children["e"].children["r"].keys
+    assert_equal [], @complete_me.root_node.children["z"].children["e"].children["r"].children["o"].keys
+  end
+
+  # def test_words_with_same_starting_letter_from_file_are_populated
+  # end
+
 end
