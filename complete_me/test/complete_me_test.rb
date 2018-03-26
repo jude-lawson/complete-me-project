@@ -16,7 +16,6 @@ class CompleteMeTest < MiniTest::Test
   def test_it_can_count
     @complete_me.insert("hello")
     @complete_me.insert("test")
-    binding.pry
     actual = @complete_me.counter
     expected = 2
 
