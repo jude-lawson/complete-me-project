@@ -46,7 +46,6 @@ class CompleteMe
 #for each child node of last prefix node, traverse tree until hitting flag, while adding each letter to a variable that is shuffled into the suggestion array
   def unweighted_suggestions(node, prefix, suggestions)
     suggestions << prefix if node.flag
-    binding.pry
     if node.has_children?
       node.children.keys.each do |letter|
         word = prefix 
@@ -58,8 +57,9 @@ class CompleteMe
     return suggestions
   end
 
-  # def weighted_suggestions(prefix, suggestions)
-  # end
+  def sort_suggestions(suggestions)
+    
+  end
 
   def populate(word_set)
     words = word_set.split("\n")
