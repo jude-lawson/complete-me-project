@@ -10,6 +10,7 @@ class CompleteMe
   def initialize
     @root_node = Node.new
     @usage_data = {}
+    @counter = 0
   end
 
   # insert
