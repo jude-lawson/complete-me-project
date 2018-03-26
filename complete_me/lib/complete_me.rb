@@ -7,13 +7,14 @@ class CompleteMe
 
   def initialize
     @root_node = Node.new
+    @usage_data = {}
   end
 
   # insert
   def insert(word)
     node = @root_node
     word.chars.map do |letter|
-      if !node.children.key?(letter)
+    unless node.children.key?(letter)
         node.children[letter] = Node.new
       end
       node = node.children[letter]
@@ -58,20 +59,17 @@ class CompleteMe
 
   end
 
-
-
+  def populate(word_set)
+    words = word_set.split("\n")
+    words.each do |word|
+      insert(word)
+    end
   end
 
-  def weighted_suggestions
-
+  def select(input, selected)
+    # take input
+    # add input as key to @usage_data with value of selected and count += 1
+    #  
   end
-
-
-
-
 
 end
-
-trie = CompleteMe.new
-trie.insert('hello')
-trie.traverse_trie("hel")
