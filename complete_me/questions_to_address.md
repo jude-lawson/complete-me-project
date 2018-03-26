@@ -1,0 +1,1 @@
+* How would we like to handle words that begin with capital letters?
