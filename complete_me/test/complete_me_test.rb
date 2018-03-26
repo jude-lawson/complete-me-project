@@ -86,7 +86,7 @@ class CompleteMeTest < MiniTest::Test
     word_set = "pizza\npie"
     @complete_me.populate(word_set)
     assert @complete_me.root_node.children["p"].children["i"].children["e"].flag
-    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].flag
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].flag
   end
 
   def test_populate_inserts_words_from_file
