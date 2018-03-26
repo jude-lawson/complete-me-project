@@ -38,12 +38,13 @@ class CompleteMeTest < MiniTest::Test
   def test_suggest_takes_substring
     @complete_me.insert("pizza")
     actual = @complete_me.suggest("piz")
-    expected = "pizza"
+    expected = ["pizza"]
 
     assert_equal expected, actual
   end
 
   def test_it_doesnt_suggest_completed_words
+    skip
     @complete_me.insert("stat")
     @complete_me.insert("status")
 
@@ -58,10 +59,11 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("pizza")
     @complete_me.insert("pizzicato")
     @complete_me.insert("pizzle")
+    @complete_me.insert("pizzeria")
     @complete_me.select("piz", "pizzeria")
 
     actual = @complete_me.suggest("piz")
-    expected = ["pizzeria", "pize", "pizza", "pizzicato", "pizzle"]
+    expected = ["pizzeria", "pizzle", "pizzicato", "pizza", "pize"]
 
     assert_equal expected, actual
   end
@@ -202,10 +204,9 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_select_raises_priority
-    skip
     @complete_me.populate("pizza\npie")
-    @complete_me.select("pi", "pizza")
-    assert_equal ["pizza", "pie"], @complete_me.suggest("piz")
+    @complete_me.select("pi", "pie")
+    assert_equal ["pie", "pizza"], @complete_me.suggest("pi")
   end
 
   def test_select_retains_usage_values

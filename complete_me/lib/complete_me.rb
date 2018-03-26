@@ -37,7 +37,7 @@ class CompleteMe
   def suggest(prefix)
     suggestions = []
     node = traverse_trie(prefix)
-    unweighted_suggestions(node, prefix, suggestions)
+    sort_suggestions(prefix, unweighted_suggestions(node, prefix, suggestions))
     # weighted_suggestions(prefix, suggestions)
   end
 
@@ -58,9 +58,14 @@ class CompleteMe
   end
 
   def sort_suggestions(prefix, suggestions)
+    return suggestions if @usage_data[prefix] == nil
     suggestions.sort_by do |word|
-      @usage_data[prefix][word]
-    end
+      if @usage_data[prefix][word] == nil
+        0
+      else
+        @usage_data[prefix][word]
+      end
+    end.reverse
   end
 
   def populate(word_set)
