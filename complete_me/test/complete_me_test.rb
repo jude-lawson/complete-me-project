@@ -90,10 +90,10 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_populate_inserts_words_from_file
-    dictionary = File.read('../data/test_dictionary.txt')
+    dictionary = File.read("./data/test_dictionary.txt")
     @complete_me.populate(dictionary)
     # Root
-    assert_equal [a..z], @complete_me.root_node.children.keys
+    assert_equal Array("a".."z"), @complete_me.root_node.children.keys
     # First two
     assert_equal ["p"], @complete_me.root_node.children["a"].keys
     assert_equal ["p"], @complete_me.root_node.children["a"].children["p"].keys
