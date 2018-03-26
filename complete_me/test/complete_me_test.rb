@@ -85,7 +85,7 @@ class CompleteMeTest < MiniTest::Test
   def test_populate_flags_words_when_inserting_two_words
     word_set = "pizza\npie"
     @complete_me.populate(word_set)
-    assert @complete_me.root_node.children["p"].children["i"].flag
+    assert @complete_me.root_node.children["p"].children["i"].children["e"].flag
     assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].flag
   end
 
@@ -93,7 +93,8 @@ class CompleteMeTest < MiniTest::Test
     dictionary = File.read("./data/test_dictionary.txt")
     @complete_me.populate(dictionary)
     # Root
-    assert_equal Array("a".."z"), @complete_me.root_node.children.keys
+    # File has two words out of alphabetical order and no word starting with 'y'
+    assert_equal %w(a b d c e f g h i j k l m n o p q r s t u v w x z), @complete_me.root_node.children.keys
     # First two
     assert_equal ["p"], @complete_me.root_node.children["a"].keys
     assert_equal ["p"], @complete_me.root_node.children["a"].children["p"].keys
