@@ -66,9 +66,7 @@ class CompleteMe
   end
 
   def select(input, selected)
-    # take input
-    # add input as key to @usage_data with value of selected and count += 1
-    #  
+    
   end
 
 end
