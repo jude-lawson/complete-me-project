@@ -8,7 +8,7 @@ class Node
   end
 
   def has_children?
-    !@chilren.empty?
+    !@children.empty?
   end
 
   def does_not_have_children?
