@@ -27,4 +27,27 @@ class CompleteMe
       insert(word)
     end
   end
+
+  def select(input, selected)
+  end
+
+  def suggest(input)
+    # call traverse, return word_array
+  end
+
+  def traverse(input_string, current_node = @root_node)
+    # Instantiate local result_array
+    # walk to current letter
+      # has word flag
+        # call walk_to_root
+      # else recurse
+    # --walk_to_root(current_node)
+      # push letter to word_array
+      # walk to upper_node
+      # if root
+        # return word_array
+      # else
+        # add letter to word_array
+        # recurse
+  end
 end
