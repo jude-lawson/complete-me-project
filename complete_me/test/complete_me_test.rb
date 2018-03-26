@@ -50,7 +50,7 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.select("piz", "pizzeria")
 
     actual = @complete_me.suggest("piz")
-    expected = ["pizzeria", "pize", "pizza", "pizzicato", "pizzle"]
+    expected = ["pizzeria", "pizzle", "pizzicato", "pizza", "pize"]
 
     assert_equal expected, actual
   end
