@@ -237,4 +237,8 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["apple"], @complete_me.suggest("apple")
   end
 
+  def method_name
+    
+  end
+
 end

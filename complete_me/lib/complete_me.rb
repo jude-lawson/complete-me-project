@@ -3,7 +3,7 @@ require 'pry'
 
 class CompleteMe
 
-  attr_reader :usage_data
+  attr_reader :usage_data, :counter
   attr_accessor :root_node
 
 
@@ -22,6 +22,7 @@ class CompleteMe
       node = node.children[letter]
     end
     node.flag = true
+    @counter += 1
     return node
   end
 
