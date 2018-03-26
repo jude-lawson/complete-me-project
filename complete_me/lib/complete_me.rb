@@ -57,8 +57,10 @@ class CompleteMe
     return suggestions
   end
 
-  def sort_suggestions(suggestions)
-    
+  def sort_suggestions(prefix, suggestions)
+    suggestions.sort_by do |word|
+      @usage_data[prefix][word]
+    end
   end
 
   def populate(word_set)
