@@ -14,12 +14,49 @@ class CompleteMe
   def insert(word)
     node = @root_node
     word.chars.map do |letter|
-      unless node.children.key?(letter)
+    unless node.children.key?(letter)
         node.children[letter] = Node.new
       end
       node = node.children[letter]
     end
     node.flag = true
+    return node
+  end
+
+  def traverse_trie(letters)
+    node = @root_node
+    letters.chars.each do |letter|
+      return nil if !node.children.key?(letter)
+      node = node.children[letter]
+    end
+    return node
+  end
+
+  def suggest(prefix)
+    suggestions = []
+    node = traverse_trie(prefix)
+    unweighted_suggestions(node, prefix, suggestions)
+    weighted_suggestions(prefix, suggestions)
+    return suggestions
+  end
+
+# take prefix and look at the last letters (node) in prefix
+#see if last node in prefix has children
+#for each child node of last prefix node, traverse tree until hitting flag, while adding each letter to a variable that is shuffled into the suggestion array
+  def unweighted_suggestions(node, prefix, suggestions)
+    suggestions << word if node.flag
+    until !node.has_children?
+      node.children.keys.each do |letter|
+        word = prefix + letter
+        node = node.children[letter]
+        unweighted_suggestions(node, word, suggestions)
+      end
+    end
+    return suggestions
+  end
+
+  def weighted_suggestions(prefix, suggestions)
+
   end
 
   def populate(word_set)
@@ -35,24 +72,4 @@ class CompleteMe
     #  
   end
 
-  def suggest(input)
-    # call traverse, set word_array
-    # sort word_array based on @usage_data created by select
-  end
-
-  def traverse(input_string, current_node = @root_node)
-    # Instantiate local result_array
-    # walk to current letter
-      # has word flag
-        # call walk_to_root
-      # else recurse
-    # --walk_to_root(current_node)
-      # push letter to word_array
-      # walk to upper_node
-      # if root
-        # return word_array
-      # else
-        # add letter to word_array
-        # recurse
-  end
 end

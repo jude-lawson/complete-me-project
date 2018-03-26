@@ -13,6 +13,37 @@ class CompleteMeTest < MiniTest::Test
     assert_instance_of CompleteMe, @complete_me
   end
 
+  def test_it_can_count
+    @complete_me.insert("hello")
+    @complete_me.insert("test")
+    actual = @complete_me.count
+    expected = 2
+
+    assert_equal expected, actual
+  end
+
+  def test_suggest_takes_substring
+    @complete_me.insert("pizza")
+    actual = @complete_me.suggest("piz")
+    expected = "pizza"
+
+    assert_equal expected, actual
+  end
+
+  def test_it_doesnt_suggest_completed_words
+    @complete_me.insert("stat")
+    @complete_me.insert("status")
+
+
+    actual =
+    expected =
+
+    assert_equal expected, actual
+  end
+
+  def test_suggest_uses_weight
+  end
+
   def test_node_can_be_inserted
     @complete_me.insert("hello")
     assert_instance_of Node, @complete_me.root_node
