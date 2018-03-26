@@ -1,5 +1,4 @@
 require_relative 'node'
-require_relative 'trie'
 require 'pry'
 
 class CompleteMe
@@ -14,18 +13,65 @@ class CompleteMe
   def insert(word)
     node = @root_node
     word.chars.map do |letter|
-      if !node.children.has_key?(letter)
+      if !node.children.key?(letter)
         node.children[letter] = Node.new
       end
       node = node.children[letter]
     end
     node.flag = true
+    return node
   end
 
-  def
+  def traverse_trie(letters)
+    node = @root_node
+    letters.chars.each do |letter|
+      return nil if !node.children.key?(letter)
+      node = node.children[letter]
+    end
+    return node
+  end
 
-  def count
+  def suggest(prefix)
+    suggestions = []
+    node = traverse_trie(prefix)
+    unweighted_suggestions(node, prefix, suggestions)
+    weighted_suggestions(prefix, suggestions)
+    return suggestions
+  end
+
+# take prefix and look at the last letters (node) in prefix
+#see if last node in prefix has children
+#for each child node of last prefix node, traverse tree until hitting flag, while adding each letter to a variable that is shuffled into the suggestion array
+  def unweighted_suggestions(node, prefix, suggestions)
+    suggestions << word if node.flag
+    until !node.has_children?
+      node.children.keys.each do |letter|
+        word = prefix + letter
+        node = node.children[letter]
+        unweighted_suggestions(node, word, suggestions)
+      end
+    end
+    return suggestions
+  end
+
+  def weighted_suggestions(prefix, suggestions)
 
   end
+
+
+
+  end
+
+  def weighted_suggestions
+
+  end
+
+
+
+
 
 end
+
+trie = CompleteMe.new
+trie.insert('hello')
+trie.traverse_trie("hel")
