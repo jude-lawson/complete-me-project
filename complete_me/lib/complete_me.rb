@@ -13,7 +13,7 @@ class CompleteMe
   # insert
   def insert(word)
     node = @root_node
-    word.chars.map do |letter|
+    word.chars.each do |letter|
     unless node.children.key?(letter)
         node.children[letter] = Node.new
       end
@@ -37,7 +37,6 @@ class CompleteMe
     node = traverse_trie(prefix)
     unweighted_suggestions(node, prefix, suggestions)
     # weighted_suggestions(prefix, suggestions)
-
   end
 
 # take prefix and look at the last letters (node) in prefix
@@ -58,7 +57,6 @@ class CompleteMe
   end
 
   # def weighted_suggestions(prefix, suggestions)
-
   # end
 
   def populate(word_set)
