@@ -73,11 +73,5 @@ class CompleteMe
     # add input as key to @usage_data with value of selected and count += 1
     #  
   end
-
 end
-
-trie = CompleteMe.new
-trie.insert("pizza")
-trie.traverse_trie("piz")
-trie.suggest("piz")
 
