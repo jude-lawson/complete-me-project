@@ -22,9 +22,9 @@ class CompleteMe
   end
 
   def populate(word_set)
+    words = word_set.split("\n")
+    words.each do |word|
+      insert(word)
+    end
   end
-
-
-
-
 end
