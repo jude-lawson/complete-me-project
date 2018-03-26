@@ -68,7 +68,7 @@ class CompleteMeTest < MiniTest::Test
   def test_populate_creates_flag_with_one_word
     word_set = "pizza\n"
     @complete_me.populate(word_set)
-    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].flag
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].flag
   end
 
   def test_populate_inserts_two_newline_separated_words
