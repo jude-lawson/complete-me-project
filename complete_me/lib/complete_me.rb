@@ -25,9 +25,9 @@ class CompleteMe
     return node
   end
 
-  def traverse_trie(letters)
+  def traverse_trie(word)
     node = @root_node
-    letters.chars.each do |letter|
+    word.chars.each do |letter|
       return nil if !node.children.key?(letter)
       node = node.children[letter]
     end

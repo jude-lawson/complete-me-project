@@ -13,14 +13,28 @@ class CompleteMeTest < MiniTest::Test
     assert_instance_of CompleteMe, @complete_me
   end
 
-  # def test_it_can_count
-  #   @complete_me.insert("hello")
-  #   @complete_me.insert("test")
-  #   actual = @complete_me.count
-  #   expected = 2
+  def test_it_can_count
+    @complete_me.insert("hello")
+    @complete_me.insert("test")
+    binding.pry
+    actual = @complete_me.counter
+    expected = 2
 
-  #   assert_equal expected, actual
-  # end
+    assert_equal expected, actual
+  end
+
+  def test_it_can_count_flags
+    skip
+    @complete_me.insert("pize")
+    @complete_me.insert("pizza")
+    @complete_me.insert("pizzicato")
+    @complete_me.insert("pizzle")
+
+    expected = 4
+    actual = @complete_me.count
+    
+    assert_equal expected, actual
+  end
 
   def test_suggest_takes_substring
     @complete_me.insert("pizza")
