@@ -23,7 +23,6 @@ class CompleteMeTest < MiniTest::Test
   # end
 
   def test_suggest_takes_substring
-    skip
     @complete_me.insert("pizza")
     actual = @complete_me.suggest("piz")
     expected = "pizza"
@@ -35,14 +34,23 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("stat")
     @complete_me.insert("status")
 
-
-    actual =
-    expected =
+    actual = @complete_me.suggest("stat")
+    expected = ["status"]
 
     assert_equal expected, actual
   end
 
   def test_suggest_uses_weight
+    @complete_me.insert("pize")
+    @complete_me.insert("pizza")
+    @complete_me.insert("pizzicato")
+    @complete_me.insert("pizzle")
+    @complete_me.select("piz", "pizzeria")
+
+    actual = complete_me.suggest("piz")
+    expected = ["pizzeria", "pize", "pizza", "pizzicato", "pizzle"]
+
+    assert_equal expected, actual
   end
 
   def test_node_can_be_inserted
