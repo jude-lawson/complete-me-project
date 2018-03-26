@@ -78,7 +78,7 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["i"], @complete_me.root_node.children["p"].keys
     assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].keys
     assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].keys
-    assert_equal ["a"], @complete_me.root_node.chidlren["p"].chidlren["i"].children["z"].children["z"].keys
+    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].keys
     assert_equal [], @complete_me.root_node.children["p"].children["i"].children["e"].keys
   end
 
@@ -86,11 +86,11 @@ class CompleteMeTest < MiniTest::Test
     word_set = "pizza\npie"
     @complete_me.populate(word_set)
     assert @complete_me.root_node.children["p"].children["i"].flag
-    assert @complete_me.root_node.children["p"].chidlren["i"].children["z"].children["z"].flag
+    assert @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].flag
   end
 
   def test_populate_inserts_words_from_file
-    dictionary = File.read('../data/test_dictionary')
+    dictionary = File.read('../data/test_dictionary.txt')
     @complete_me.populate(dictionary)
     # Root
     assert_equal [a..z], @complete_me.root_node.children.keys
@@ -99,14 +99,14 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["p"], @complete_me.root_node.children["a"].children["p"].keys
     assert_equal ["l"], @complete_me.root_node.children["a"].children["p"].children["p"].keys
     assert_equal ["e"], @complete_me.root_node.children["a"].children["p"].children["p"].children["l"].keys
-    assert_equal [], @complete_me.root_node.children["a"].children["p"].children["p"].children["l"].chidlren["e"].keys
+    assert_equal [], @complete_me.root_node.children["a"].children["p"].children["p"].children["l"].children["e"].keys
 
-    assert_equal ["a"], @complete_me.root_node.chidlren["b"].keys
-    assert_equal ["n"], @complete_me.root_node.chidlren["b"].children["a"].keys
-    assert_equal ["a"], @complete_me.root_node.chidlren["b"].children["a"].chidlren["n"].keys
-    assert_equal ["n"], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].keys
-    assert_equal ["a"], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].children["n"].keys
-    assert_equal [], @complete_me.root_node.chidlren["b"].children["a"].children["n"].children["a"].children["n"].children["a"].keys
+    assert_equal ["a"], @complete_me.root_node.children["b"].keys
+    assert_equal ["n"], @complete_me.root_node.children["b"].children["a"].keys
+    assert_equal ["a"], @complete_me.root_node.children["b"].children["a"].children["n"].keys
+    assert_equal ["n"], @complete_me.root_node.children["b"].children["a"].children["n"].children["a"].keys
+    assert_equal ["a"], @complete_me.root_node.children["b"].children["a"].children["n"].children["a"].children["n"].keys
+    assert_equal [], @complete_me.root_node.children["b"].children["a"].children["n"].children["a"].children["n"].children["a"].keys
     
     # Middle two (by letters of alphabet)
     assert_equal ["o"], @complete_me.root_node.children["m"].keys
@@ -117,7 +117,7 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["e"], @complete_me.root_node.children["n"].keys
     assert_equal ["s"], @complete_me.root_node.children["n"].children["e"].keys
     assert_equal ["t"], @complete_me.root_node.children["n"].children["e"].children["s"].keys
-    assert_equal [], @complete_me.root_node.children["n"].children["e"].children["s"].chidlren["t"].keys
+    assert_equal [], @complete_me.root_node.children["n"].children["e"].children["s"].children["t"].keys
 
     #Last two
     assert_equal ["y"], @complete_me.root_node.children["x"].keys
@@ -137,12 +137,12 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_words_with_same_starting_letter_from_file_are_populated
-    assert_equal ["i"], @complete_me.root_node.chidlren["p"].keys
-    assert_equal ["z", "e"], @complete_me.root_node.chidlren["p"].children["i"].keys
-    assert_equal ["z"], @complete_me.root_node.chidlren["p"].children["i"].children["z"].keys
+    assert_equal ["i"], @complete_me.root_node.children["p"].keys
+    assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].keys
+    assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].keys
     assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].keys
     assert_equal [], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].keys
-    assert_equal [], @complete_me.roor_node.chidlren["p"].children["i"].chidlren["e"].keys
+    assert_equal [], @complete_me.roor_node.children["p"].children["i"].children["e"].keys
   end
 
 end
