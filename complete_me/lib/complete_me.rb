@@ -3,7 +3,9 @@ require 'pry'
 
 class CompleteMe
 
+  attr_reader :usage_data
   attr_accessor :root_node
+
 
   def initialize
     @root_node = Node.new
@@ -67,9 +69,15 @@ class CompleteMe
   end
 
   def select(input, selected)
-    # take input
-    # add input as key to @usage_data with value of selected and count += 1
-    #  
+    if @usage_data[input]
+      if @usage_data[input][selected]
+        @usage_data[input][selected] += 1
+      else
+        @usage_data[input] = {selected => 1}
+      end
+    else
+      @usage_data = {input => {selected => 1}}
+    end
   end
 end
 
