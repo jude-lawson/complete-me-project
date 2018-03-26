@@ -1,5 +1,7 @@
 class Node
-  attr_accessor :weight, :flag, :children
+  attr_accessor :weight, 
+                :flag, 
+                :children
 
   def initialize
     @weight = {}
