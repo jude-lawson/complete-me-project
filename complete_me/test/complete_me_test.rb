@@ -23,14 +23,13 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_it_can_count_flags
-    skip
     @complete_me.insert("pize")
     @complete_me.insert("pizza")
     @complete_me.insert("pizzicato")
     @complete_me.insert("pizzle")
 
     expected = 4
-    actual = @complete_me.count
+    actual = @complete_me.counter
     
     assert_equal expected, actual
   end
