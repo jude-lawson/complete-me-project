@@ -136,7 +136,13 @@ class CompleteMeTest < MiniTest::Test
     assert_equal [], @complete_me.root_node.children["z"].children["e"].children["r"].children["o"].keys
   end
 
-  # def test_words_with_same_starting_letter_from_file_are_populated
-  # end
+  def test_words_with_same_starting_letter_from_file_are_populated
+    assert_equal ["i"], @complete_me.root_node.chidlren["p"].keys
+    assert_equal ["z", "e"], @complete_me.root_node.chidlren["p"].children["i"].keys
+    assert_equal ["z"], @complete_me.root_node.chidlren["p"].children["i"].children["z"].keys
+    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].keys
+    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].keys
+    assert_equal [], @complete_me.roor_node.chidlren["p"].children["i"].chidlren["e"].keys
+  end
 
 end
