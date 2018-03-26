@@ -13,7 +13,7 @@ class CompleteMe
   # insert
   def insert(word)
     node = @root_node
-    word.chars.map do |letter|
+    word.chars.each do |letter|
     unless node.children.key?(letter)
         node.children[letter] = Node.new
       end
