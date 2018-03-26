@@ -13,16 +13,17 @@ class CompleteMeTest < MiniTest::Test
     assert_instance_of CompleteMe, @complete_me
   end
 
-  def test_it_can_count
-    @complete_me.insert("hello")
-    @complete_me.insert("test")
-    actual = @complete_me.count
-    expected = 2
+  # def test_it_can_count
+  #   @complete_me.insert("hello")
+  #   @complete_me.insert("test")
+  #   actual = @complete_me.count
+  #   expected = 2
 
-    assert_equal expected, actual
-  end
+  #   assert_equal expected, actual
+  # end
 
   def test_suggest_takes_substring
+    skip
     @complete_me.insert("pizza")
     actual = @complete_me.suggest("piz")
     expected = "pizza"
@@ -180,22 +181,26 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_select_raises_priority
+    skip
     @complete_me.populate("pizza\npie")
     @complete_me.select("pi", "pizza")
     assert_equal ["pizza", "pie"], @complete_me.suggest("piz")
   end
 
   def test_traverse_walks_tree_with_one_word_branch
+    skip
     @complete_me.insert("pizza")
     assert_equal ["pizza"], @complete_me.suggest("piz")
   end
 
   def test_traverse_walks_tree_with_two_word_branch
+    skip
     @complete_me.populate("pizza\npie")
     assert_equal ["pie", "pizza"], @complete_me.suggest("pi")
   end
 
   def test_general_result_of_tree_traversal
+    skip
     dictionary = File.read('./data/test_dictionary.txt')
     @complete_me.populate(dictionary)
     assert_equal ["constellation"], @complete_me.suggest("const")
