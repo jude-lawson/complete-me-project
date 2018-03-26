@@ -7,6 +7,7 @@ class CompleteMe
 
   def initialize
     @root_node = Node.new
+    @usage_data = {}
   end
 
   # insert
@@ -29,10 +30,14 @@ class CompleteMe
   end
 
   def select(input, selected)
+    # take input
+    # add input as key to @usage_data with value of selected and count += 1
+    #  
   end
 
   def suggest(input)
-    # call traverse, return word_array
+    # call traverse, set word_array
+    # sort word_array based on @usage_data created by select
   end
 
   def traverse(input_string, current_node = @root_node)
