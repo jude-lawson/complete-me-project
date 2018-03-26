@@ -138,12 +138,14 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_words_with_same_starting_letter_from_file_are_populated
-    assert_equal ["i"], @complete_me.root_node.children["p"].keys
-    assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].keys
-    assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].keys
-    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].keys
-    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].keys
-    assert_equal [], @complete_me.roor_node.children["p"].children["i"].children["e"].keys
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    assert_equal ["i"], @complete_me.root_node.children["p"].children.keys
+    assert_equal ["z", "e"], @complete_me.root_node.children["p"].children["i"].children.keys
+    assert_equal ["z"], @complete_me.root_node.children["p"].children["i"].children["z"].children.keys
+    assert_equal ["a"], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children.keys
+    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["z"].children["z"].children["a"].children.keys
+    assert_equal [], @complete_me.root_node.children["p"].children["i"].children["e"].children.keys
   end
 
 end
