@@ -192,8 +192,8 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.select("pi", "pizza")
     # binding.pry
     assert_equal 1, @complete_me.usage_data["pi"]["pizza"]
-    # @complete_me.select("pi", "pizza")
-    # assert_equal 2, @complete_me.usage_data["pi"]["pizza"]
+    @complete_me.select("pi", "pizza")
+    assert_equal 2, @complete_me.usage_data["pi"]["pizza"]
   end
 
   def test_traverse_walks_tree_with_one_word_branch
