@@ -35,9 +35,8 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("stat")
     @complete_me.insert("status")
 
-
-    actual =
-    expected =
+    actual = @complete_me.suggest("stat")
+    expected = ["status"]
 
     assert_equal expected, actual
   end
