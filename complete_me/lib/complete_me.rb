@@ -33,27 +33,28 @@ class CompleteMe
   end
 
   def suggest(prefix)
-    # suggestions = []
-    # node = traverse_trie(prefix)
-    # unweighted_suggestions(node, prefix, suggestions)
+    suggestions = []
+    node = traverse_trie(prefix)
+    unweighted_suggestions(node, prefix, suggestions)
     # weighted_suggestions(prefix, suggestions)
-    # return suggestions
   end
 
 # take prefix and look at the last letters (node) in prefix
 #see if last node in prefix has children
 #for each child node of last prefix node, traverse tree until hitting flag, while adding each letter to a variable that is shuffled into the suggestion array
-  # def unweighted_suggestions(node, prefix, suggestions)
-  #   suggestions << word if node.flag
-  #   until !node.has_children?
-  #     node.children.keys.each do |letter|
-  #       word = prefix + letter
-  #       node = node.children[letter]
-  #       unweighted_suggestions(node, word, suggestions)
-  #     end
-  #   end
-  #   return suggestions
-  # end
+  def unweighted_suggestions(node, prefix, suggestions)
+    suggestions << prefix if node.flag
+    binding.pry
+    if node.has_children?
+      node.children.keys.each do |letter|
+        word = prefix 
+        word += letter
+        suggest_node = node.children[letter]
+        unweighted_suggestions(suggest_node, word, suggestions)
+      end
+    end
+    return suggestions
+  end
 
   # def weighted_suggestions(prefix, suggestions)
   # end
@@ -70,5 +71,5 @@ class CompleteMe
     # add input as key to @usage_data with value of selected and count += 1
     #  
   end
-
 end
+
