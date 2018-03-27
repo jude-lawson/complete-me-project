@@ -126,14 +126,5 @@ class CompleteMe
   end
 end
 
-# trie = CompleteMe.new
-# trie.insert("pize")
-# trie.insert("pizza")
-# trie.insert("pizzicato")
-# trie.insert("pizzle")
-# trie.delete("pizza")
-# search = trie.traverse_trie("pizz")
-# binding.pry
-
 
 
