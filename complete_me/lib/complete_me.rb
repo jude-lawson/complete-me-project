@@ -89,7 +89,33 @@ class CompleteMe
     end
   end
 
+  # if the node does not have any children, just set node.flag to false
+  # if the node has children change the node flag to false and delete all children 
+  # up to the next flag... do not delete this flag
   def delete(word)
+    node = traverse_trie(word)
+    if node.has_children?
+      node.flag = false
+    elsif !node.has_children?
+      node.flag = false
+      delete_continued(word, node)
+    end
+    @count -= 1
+  end
+
+  def delete_continued(word, node)
+    last_letter = word[-1]
+    sub_string = word[0...-1]
+    node = traverse_trie(sub_string)
+
+    if node.children.key?(last_letter) && node.flag == false
+      node.children.delete(last_letter)
+      delete(sub_string)
+    elsif node.children.key?[last_letter] && node.flag == true
+      node.children.delete(last_letter)
+    end
   end
 end
+
+
 
