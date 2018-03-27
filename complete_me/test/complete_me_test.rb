@@ -16,7 +16,7 @@ class CompleteMeTest < MiniTest::Test
   def test_it_can_count
     @complete_me.insert("hello")
     @complete_me.insert("test")
-    actual = @complete_me.counter
+    actual = @complete_me.count
     expected = 2
 
     assert_equal expected, actual
@@ -29,7 +29,7 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("pizzle")
 
     expected = 4
-    actual = @complete_me.counter
+    actual = @complete_me.count
     
     assert_equal expected, actual
   end
