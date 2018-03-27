@@ -112,7 +112,7 @@ class CompleteMe
     if node.children.key?(last_letter) && node.flag == false
       node.children.delete(last_letter)
       delete(sub_string)
-    elsif node.children.key?([last_letter]) && node.flag == true
+    elsif node.children.key?(last_letter) && node.flag == true
       node.children.delete(last_letter)
     end
   end
