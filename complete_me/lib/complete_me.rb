@@ -47,6 +47,7 @@ class CompleteMe
 #see if last node in prefix has children
 #for each child node of last prefix node, traverse tree until hitting flag, while adding each letter to a variable that is shuffled into the suggestion array
   def unweighted_suggestions(node, prefix, suggestions)
+    return [] if node == nil
     suggestions << prefix if node.flag
     if node.has_children?
       node.children.keys.each do |letter|
@@ -111,7 +112,7 @@ class CompleteMe
     if node.children.key?(last_letter) && node.flag == false
       node.children.delete(last_letter)
       delete(sub_string)
-    elsif node.children.key?(last_letter) && node.flag == true
+    elsif node.children.key?([last_letter]) && node.flag == true
       node.children.delete(last_letter)
     end
   end
