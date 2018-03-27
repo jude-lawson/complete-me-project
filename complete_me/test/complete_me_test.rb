@@ -45,12 +45,11 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_it_doesnt_suggest_completed_words
-    skip
     @complete_me.insert("stat")
     @complete_me.insert("status")
 
     actual = @complete_me.suggest("stat")
-    expected = ["status"]
+    expected = ["stat", "status"]
 
     assert_equal expected, actual
   end
