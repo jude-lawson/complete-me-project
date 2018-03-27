@@ -237,4 +237,37 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["apple"], @complete_me.suggest("apple")
   end
 
+  def test_that_delete_removes_one_word
+    @complete_me.insert("pizza")
+    @complete_me.delete("pizza")
+    refute @complete_me.root_node.has_children?
+    assert_equal nil, @complete_me.root_node.children["p"]
+  end
+
+  def test_delete_removes_word_starting_at_root_node
+    @complete_me.insert("definitely")
+    @complete_me.delete("definitely")
+    refute @complete_me.root_node.has_children?
+    assert_equal nil, @complete_me.root_node.children["d"]
+  end
+  
+  def test_delete_removes_word_nested_in_other_word
+    @complete_me.insert("definitely")
+    @complete_me.insert("finite")
+    actual = @complete_me.root_node.children["d"].children["e"].children["f"].children["i"].children["n"].children["i"].children["t"].children["e"].flag
+    assert_equal false, actual
+  end
+
+  def test_delete_removes_word_branching_from_other_word
+  end
+
+  def test_delete_removes_multiple_words
+  end
+
+  def test_that_no_words_are_suggested_after_removing_one_word
+  end
+
+  def test_thta_no_words_are_suggested_after_removing_multiple_words
+  end
+
 end
