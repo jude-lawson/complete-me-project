@@ -88,8 +88,5 @@ class CompleteMe
       @usage_data = {input => {selected => 1}}
     end
   end
-
-  def delete(word)
-  end
 end
 
