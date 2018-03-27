@@ -259,6 +259,10 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_delete_removes_word_branching_from_other_word
+    @complete_me.insert("dog")
+    @complete_me.insert("daisy")
+    @complete_me.delete("dog")
+    assert_equal ["a"], @complete_me.root_node.children["d"].keys
   end
 
   def test_delete_removes_multiple_words
