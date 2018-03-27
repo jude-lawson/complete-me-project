@@ -65,7 +65,6 @@ class CompleteMeTest < MiniTest::Test
 
     actual = @complete_me.suggest("piz")
     expected = ["pizzeria", "pizzle", "pizzicato", "pizza", "pize"]
-    binding.pry
     assert_equal expected, actual
   end
 
@@ -96,7 +95,6 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("dog")
     root_child = @complete_me.root_node.children["d"]
     assert_instance_of Node, root_child.children["o"]
-    # binding.pry
     assert_equal ["o"], root_child.children.keys
     assert_equal ({}), root_child.children["o"].weight
     assert_equal false, root_child.children["o"].flag
@@ -213,7 +211,6 @@ class CompleteMeTest < MiniTest::Test
   def test_select_retains_usage_values
     @complete_me.populate("pizza\npie")
     @complete_me.select("pi", "pizza")
-    # binding.pry
     assert_equal 1, @complete_me.usage_data["pi"]["pizza"]
     @complete_me.select("pi", "pizza")
     assert_equal 2, @complete_me.usage_data["pi"]["pizza"]
