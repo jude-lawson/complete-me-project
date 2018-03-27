@@ -262,16 +262,33 @@ class CompleteMeTest < MiniTest::Test
     @complete_me.insert("dog")
     @complete_me.insert("daisy")
     @complete_me.delete("dog")
-    assert_equal ["a"], @complete_me.root_node.children["d"].keys
+    assert_equal ["a"], @complete_me.root_node.children["d"].children.keys
   end
 
   def test_delete_removes_multiple_words
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("constellation")
+    @complete_me.delete("ostrich")
+    @complete_me.delete("tea")
+    assert_equal ["a"], @complete_me.root_node.children["c"].children.keys
+    assert_equal nil, @complete_me.root_node.children["o"]
+    assert_equal nil, @complete_me.root_node.children["t"]
   end
 
   def test_that_no_words_are_suggested_after_removing_one_word
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("llama")
+    assert_equal [], @complete_me.suggest("lla")
   end
 
-  def test_thta_no_words_are_suggested_after_removing_multiple_words
+  def test_that_no_words_are_suggested_after_removing_multiple_words
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("pizza")
+    @complete_me.delete("pie")
+    assert_equal [], @complete_me.suggest("pi")
   end
 
 end
