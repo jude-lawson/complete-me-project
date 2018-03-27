@@ -3,6 +3,7 @@ SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/complete_me'
+require 'pry'
 
 # Tests for main CompleteMe class
 class CompleteMeTest < MiniTest::Test
@@ -64,7 +65,7 @@ class CompleteMeTest < MiniTest::Test
 
     actual = @complete_me.suggest("piz")
     expected = ["pizzeria", "pizzle", "pizzicato", "pizza", "pize"]
-
+    binding.pry
     assert_equal expected, actual
   end
 

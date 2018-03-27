@@ -89,23 +89,23 @@ class CompleteMe
     end
   end
 
-  # def traverse_trie(word)
-  #   node = @root_node
-  #   word.chars.each do |letter|
-  #     return nil if !node.children.key?(letter)
-  #     node = node.children[letter]
-  #   end
-  #   return node
-  # end
+  def traverse_trie(word)
+    node = @root_node
+    word.chars.each do |letter|
+      return nil if !node.children.key?(letter)
+      node = node.children[letter]
+    end
+    return node
+  end
 
-  #if the node does not have any children, just set node.flag to false
-  #if the node has children change the node flag to false and delete all children 
-  #up to the next flag... do not delete this flag
-  def delete(word, node = @root_node)
+  # if the node does not have any children, just set node.flag to false
+  # if the node has children change the node flag to false and delete all children 
+  # up to the next flag... do not delete this flag
+  def delete(word)
     node = traverse_trie(word)
     if node.has_children?
       node.flag = false
-    elsif node.does_not_have_children?
+    elsif !node.has_children?
       node.flag = false
       delete_continued(word, node)
     end
@@ -117,18 +117,23 @@ class CompleteMe
     sub_string = word[0...-1]
     node = traverse_trie(sub_string)
 
-    if node.children.key?[last_letter] && node.flag == false
-      node.children = node.children.dup.tap do |hash|
-        hash.delete(last_letter)
-      end
+    if node.children.key?(last_letter) && node.flag == false
+      node.children.delete(last_letter)
+      delete(sub_string)
     elsif node.children.key?[last_letter] && node.flag == true
-
+      node.children.delete(last_letter)
     end
-     #if node does not have children, delete hash node.children[last_letter]
-    #if the node has children, dup node, delete node child
-
-    node.child_nodes.dup.tap { |hash| hash.delete(last_letter)}
-
   end
 end
+
+# trie = CompleteMe.new
+# trie.insert("pize")
+# trie.insert("pizza")
+# trie.insert("pizzicato")
+# trie.insert("pizzle")
+# trie.delete("pizza")
+# search = trie.traverse_trie("pizz")
+# binding.pry
+
+
 

@@ -13,8 +13,4 @@ class Node
     !@children.empty?
   end
 
-  def does_not_have_children?
-    @children.empty?
-  end
-
 end
