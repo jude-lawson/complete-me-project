@@ -45,12 +45,11 @@ class CompleteMeTest < MiniTest::Test
   end
 
   def test_it_doesnt_suggest_completed_words
-    skip
     @complete_me.insert("stat")
     @complete_me.insert("status")
 
     actual = @complete_me.suggest("stat")
-    expected = ["status"]
+    expected = ["stat", "status"]
 
     assert_equal expected, actual
   end
@@ -236,6 +235,60 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["pizza", "pie"], @complete_me.suggest("pi")
     assert_equal ["xylophone"], @complete_me.suggest("xylop")
     assert_equal ["apple"], @complete_me.suggest("apple")
+  end
+
+  def test_that_delete_removes_one_word
+    @complete_me.insert("pizza")
+    @complete_me.delete("pizza")
+    refute @complete_me.root_node.has_children?
+    assert_equal nil, @complete_me.root_node.children["p"]
+  end
+
+  def test_delete_removes_word_starting_at_root_node
+    @complete_me.insert("definitely")
+    @complete_me.delete("definitely")
+    refute @complete_me.root_node.has_children?
+    assert_equal nil, @complete_me.root_node.children["d"]
+  end
+  
+  def test_delete_removes_word_nested_in_other_word
+    @complete_me.insert("definitely")
+    @complete_me.insert("finite")
+    actual = @complete_me.root_node.children["d"].children["e"].children["f"].children["i"].children["n"].children["i"].children["t"].children["e"].flag
+    assert_equal false, actual
+  end
+
+  def test_delete_removes_word_branching_from_other_word
+    @complete_me.insert("dog")
+    @complete_me.insert("daisy")
+    @complete_me.delete("dog")
+    assert_equal ["a"], @complete_me.root_node.children["d"].children.keys
+  end
+
+  def test_delete_removes_multiple_words
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("constellation")
+    @complete_me.delete("ostrich")
+    @complete_me.delete("tea")
+    assert_equal ["a"], @complete_me.root_node.children["c"].children.keys
+    assert_equal nil, @complete_me.root_node.children["o"]
+    assert_equal nil, @complete_me.root_node.children["t"]
+  end
+
+  def test_that_no_words_are_suggested_after_removing_one_word
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("llama")
+    assert_equal [], @complete_me.suggest("lla")
+  end
+
+  def test_that_no_words_are_suggested_after_removing_multiple_words
+    dictionary = File.read("./data/test_dictionary.txt")
+    @complete_me.populate(dictionary)
+    @complete_me.delete("pizza")
+    @complete_me.delete("pie")
+    assert_equal [], @complete_me.suggest("pi")
   end
 
 end
