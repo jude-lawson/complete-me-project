@@ -88,5 +88,47 @@ class CompleteMe
       @usage_data = {input => {selected => 1}}
     end
   end
+
+  # def traverse_trie(word)
+  #   node = @root_node
+  #   word.chars.each do |letter|
+  #     return nil if !node.children.key?(letter)
+  #     node = node.children[letter]
+  #   end
+  #   return node
+  # end
+
+  #if the node does not have any children, just set node.flag to false
+  #if the node has children change the node flag to false and delete all children 
+  #up to the next flag... do not delete this flag
+  def delete(word, node = @root_node)
+    node = traverse_trie(word)
+    if node.has_children?
+      node.flag = false
+    elsif node.does_not_have_children?
+      node.flag = false
+      delete_continued(word, node)
+    end
+    @count -= 1
+  end
+
+  def delete_continued(word, node)
+    last_letter = word[-1]
+    sub_string = word[0...-1]
+    node = traverse_trie(sub_string)
+
+    if node.children.key?[last_letter] && node.flag == false
+      node.children = node.children.dup.tap do |hash|
+        hash.delete(last_letter)
+      end
+    elsif node.children.key?[last_letter] && node.flag == true
+
+    end
+     #if node does not have children, delete hash node.children[last_letter]
+    #if the node has children, dup node, delete node child
+
+    node.child_nodes.dup.tap { |hash| hash.delete(last_letter)}
+
+  end
 end
 
