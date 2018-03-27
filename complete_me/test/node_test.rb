@@ -45,5 +45,14 @@ class NodeTest < MiniTest::Test
     refute @node.flag
   end
 
+  def test_checking_for_node_child
+    @node.children["b"] = Node.new
+    assert @node.has_children?
+  end
+
+  def test_checking_for_node_without_child_nodes
+    refute @node.has_children?
+  end
+
 
 end
