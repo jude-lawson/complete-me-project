@@ -111,7 +111,7 @@ class CompleteMe
     if node.children.key?(last_letter) && node.flag == false
       node.children.delete(last_letter)
       delete(sub_string)
-    elsif node.children.key?[last_letter] && node.flag == true
+    elsif node.children.key?(last_letter) && node.flag == true
       node.children.delete(last_letter)
     end
   end
@@ -126,8 +126,9 @@ trie.insert("pize")
 trie.insert("pizza")
 trie.insert("pizzicato")
 trie.insert("pizzle")
+binding.pry
 trie.delete("pizza")
-search = trie.traverse_trie("pizz")
+search = trie.traverse_trie("pizza")
 binding.pry
 
 
