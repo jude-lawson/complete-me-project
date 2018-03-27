@@ -118,19 +118,5 @@ class CompleteMe
   end
 end
 
-#objects and methods
-#core types specifically hashes and nested collections
-#Mythical creatures
-
-trie = CompleteMe.new
-trie.insert("pize")
-trie.insert("pizza")
-trie.insert("pizzicato")
-trie.insert("pizzle")
-binding.pry
-trie.delete("pizza")
-search = trie.traverse_trie("pizza")
-binding.pry
-
 
 
