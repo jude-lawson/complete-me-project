@@ -3,14 +3,14 @@ require 'pry'
 
 class CompleteMe
 
-  attr_reader :usage_data, :counter
+  attr_reader :usage_data, :count
   attr_accessor :root_node
 
 
   def initialize
     @root_node = Node.new
     @usage_data = {}
-    @counter = 0
+    @count = 0
   end
 
   # insert
@@ -23,7 +23,7 @@ class CompleteMe
       node = node.children[letter]
     end
     node.flag = true
-    @counter += 1
+    @count += 1
     return node
   end
 
