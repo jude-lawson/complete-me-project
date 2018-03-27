@@ -89,15 +89,6 @@ class CompleteMe
     end
   end
 
-  def traverse_trie(word)
-    node = @root_node
-    word.chars.each do |letter|
-      return nil if !node.children.key?(letter)
-      node = node.children[letter]
-    end
-    return node
-  end
-
   # if the node does not have any children, just set node.flag to false
   # if the node has children change the node flag to false and delete all children 
   # up to the next flag... do not delete this flag
