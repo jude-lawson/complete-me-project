@@ -7,9 +7,16 @@
 </head>
 <body>
   <h1>Complete Me Project</h1>
-  <form action="/" method="POST" id="suggestion-form" >
+  <form action="/" method="POST" id="suggestion-form">
     <input type="text" name="word" id="word-input" placeholder="Enter part of a word...">
     <button type="submit" class="submit-button">See Suggestions</button>
   </form>
+  <div id="results-container">
+    <ul id="results-list">
+    <% suggestions.each do |word| %>
+      <li class="suggested_word"><%= word %></li>
+    <% end %>
+    </ul>
+  </div>
 </body>
 </html>
