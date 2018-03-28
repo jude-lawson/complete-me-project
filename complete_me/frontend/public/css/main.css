@@ -1,3 +1,27 @@
 body {
   background: aliceblue;
 }
+
+#suggestion-form {
+  width: 30%;
+  margin: 0 auto;
+}
+
+#word-input {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  border: none;
+  border-bottom: 1px solid black;
+  background: aliceblue;
+}
+
+#results-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#results-list li {
+  display: inline;
+  margin: 8px 12px;
+}
