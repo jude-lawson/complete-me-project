@@ -1,5 +1,6 @@
 body {
-  background: aliceblue;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 30px;
 }
 
 #suggestion-form {
@@ -12,8 +13,35 @@ body {
   width: 100%;
   margin-bottom: 12px;
   border: none;
-  border-bottom: 1px solid black;
-  background: aliceblue;
+  border-bottom: 1px solid darkcyan;
+  transition: .2s ease-in-out;
+  font-size: 18px;
+}
+
+#word-input:focus {
+  outline: none;
+  border-bottom: 1px solid mediumaquamarine;
+}
+
+.submit-button {
+  background: transparent;
+  border: 1px solid darkcyan;
+  padding: 10px;
+  border-radius: .4em;
+  color: darkcyan;
+  font-size: 16px;
+  transition: .2s ease-in-out;
+}
+
+.submit-button:hover {
+  background: mediumaquamarine;
+  border-color: mediumaquamarine;
+  color: white;
+  cursor: pointer;
+}
+
+.submit-button:focus {
+  outline: none;
 }
 
 #results-list {
