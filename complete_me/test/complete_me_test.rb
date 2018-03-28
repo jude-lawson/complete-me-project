@@ -263,6 +263,15 @@ class CompleteMeTest < MiniTest::Test
     assert_equal ["a"], @complete_me.root_node.children["d"].children.keys
   end
 
+  def test_it_can_take_an_address
+    address_dictionary = File.read("./data/test_addresses.txt")
+    @complete_me.insert("1553 N King St")
+    node = @complete_me.traverse_trie("1553 N King St")
+    actual = node.flag
+    expected = true
+    assert_equal expected, actual
+  end
+
   def test_delete_removes_multiple_words
     dictionary = File.read("./data/test_dictionary.txt")
     @complete_me.populate(dictionary)
