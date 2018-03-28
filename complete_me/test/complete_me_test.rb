@@ -293,6 +293,7 @@ class CompleteMeTest < MiniTest::Test
     
     expected = false
     actual = node.children.empty?
+    
     assert_equal expected, actual
   end
 
