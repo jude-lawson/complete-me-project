@@ -10,5 +10,5 @@ post '/' do
   dictionary = File.read("/usr/share/dict/words")
   cm.populate(dictionary)
   suggestions = cm.suggest(params[:word])
-  erb :new_index, :locals => {:suggestions => suggestions}
+  erb :results, :locals => {:suggestions => suggestions}
 end
