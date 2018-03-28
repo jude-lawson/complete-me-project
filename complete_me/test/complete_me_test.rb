@@ -272,6 +272,30 @@ class CompleteMeTest < MiniTest::Test
     assert_equal expected, actual
   end
 
+  def test_it_can_take_a_dictionary_of_addresses
+    address_dictionary = File.read("./data/test_addresses.txt")
+    @complete_me.populate_addresses(address_dictionary)
+    node = @complete_me.traverse_trie("1553 N King St")
+    node1 = @complete_me.traverse_trie("1781 N York St Unit 324")
+    node2 = @complete_me.traverse_trie("7575 E 29th Pl Unit 5002")
+    node3 = @complete_me.traverse_trie("1250 N Cherokee St Unit 804")
+
+    assert_equal true, node.flag
+    assert_equal true, node1.flag
+    assert_equal true, node2.flag
+    assert_equal true, node3.flag
+  end
+
+  def test_successful_creation_of_child_nodes_addresses
+    address_dictionary = File.read("./data/test_addresses.txt")
+    @complete_me.populate_addresses(address_dictionary)
+    node = @complete_me.traverse_trie("1553 N King")
+    
+    expected = false
+    actual = node.children.empty?
+    assert_equal expected, actual
+  end
+
   def test_delete_removes_multiple_words
     dictionary = File.read("./data/test_dictionary.txt")
     @complete_me.populate(dictionary)
