@@ -78,6 +78,15 @@ class CompleteMe
     end
   end
 
+  def populate_addresses(address_dictionary)
+    data_line = address_dictionary.split("\n")
+    data_line.each do |line|
+      data_line_array = line.split(",")
+      address = data_line_array[-1]
+      insert(address)
+    end
+  end
+
   def select(input, selected)
     if @usage_data[input]
       if @usage_data[input][selected]
@@ -117,6 +126,3 @@ class CompleteMe
     end
   end
 end
-
-
-
